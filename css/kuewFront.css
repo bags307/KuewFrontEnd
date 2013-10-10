@@ -151,37 +151,41 @@ h5 {
     font-size: 24px;
 }
 .planButton {
-    width: 124.5%;
+    width: 100%;
     height: 55px;
     background-color: #9999cb;
-    margin-left: -21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .planSmall {
-    color: #fff; /* text color */
+    /*color: #fff; *//* text color */
     font-family: "Roboto";
     font-size: 14px;
 }
 .planHeader {
-    width: 218px;
-    height: 67px;
-    background-color: #79e37f; /* layer fill content */
+    width: 100%;
+    height: 25%;
+/*    background-color: #79e37f;*/
 }
 
 .planName {
 color: #fff;
+    color: #086064;
     font-family: "Roboto";
     font-size: 48px;
     text-align: center;
 }
 
 .planBox {
-    width: 217px;
+    width: 218px;
     height: 313px;
-    background-color: #003365;
+   /* background-color: #6dc8cd;*/
     display: flex;
     flex-flow: column;
     align-items: center;
-    margin-left: 6em;
+   /* margin: 6em;*/
+    font-weight: 300
 }
 .menuUnderscore {
     width: 100px;
@@ -231,16 +235,74 @@ color: #fff;
     list-style-type: none;
     display: flex;
     flex-flow: row;
-    margin-top: 2em;
-    margin-bottom: 1em;
+   /* margin-top: 2em;*/
+/*    margin-bottom: 1em;*/
     text-align: center;
+    justify-content: space-between;
 
 }
+
 .pricebox{
     height: 60%;
     width: 100%;
 }
-
+.coolguy {
+    width: 94px;
+    height: 293px;
+}
+.userCount {
+    width: 133px;
+    height: 288px;
+    background-color: #79e37f; /* layer fill content */
+}
+.explainer {
+    color: #a50f0c; /* text color */
+    font-family: "Roboto";
+    font-size: 18px;
+}
+.userCountBox{
+    font-size: 10em;
+    width: 1em;
+    text-align: center;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 3px;
+    border-bottom-style: solid;
+}
+.guyBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+.priceUserCountRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.explainer {
+    color: tomato;
+    font-family: "Roboto";
+    font-size: 18px;
+    line-height: 34px;
+    font-weight: 300;
+    text-align: justify;
+}
+.pricingTable {
+    font-family: roboto;
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.pricingTable thead{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+}
 @media (min-width: 1200px)
     .container {
         max-width: 100% !important;
