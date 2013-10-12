@@ -123,14 +123,7 @@
 
     <div class="row priceUserCountRow">
         <div class="col-sm-12 col-md-3 ">
-            <div class="row">
-                <h2 id="kuewUse">0 Kuews</h2>
-                <p class="explainer">estimated intial kuews</p>
-            </div>
 
-            <div class="row">
-                <div id="kuewSlider" class="cost"></div>
-            </div>
             <div class="row">
                 <h2 id="emailUse">0 kuew emails</h2>
                 <p class="explainer">estimated Kuew emails</p>
@@ -174,10 +167,16 @@
                Use the sliders to estimate your KuewUsage.  KuewUsage is based on what we call <b>BuzzPoints</b>, and different
                 things require different amounts of BuzzPoints.  Bad at math - no worries.  We'll let you know whats going on.
             </p>
-
-            <p id="buzzPointsCalc" class="huge">I guess I need ? BuzzPoints</p>
+          <!--  <div id=planTable" class="col-md-12">
+                <row> TODO determine if plan table is needed
+                    <span class="almosthuge"></span>
+                </row>
+            </div>-->
+            <p id="buzzPointsCalc" class="almosthuge">I guess I need ? BuzzPoints</p>
             <p class="explainer" style="text-align: center;">estimate too low? no problem.</p>
-            <p id="MonthlyTotal" class="huge">My monthly bill is going to be ?</p>
+            <p id="MonthlyTotal" class="almosthuge">My monthly bill is going to be ?</p>
+            <p id="MonthlyDiscount" class="almosthuge"></p>
+
         </div>              <!--TODO - add signup buttons-->
 
     </div>
@@ -596,46 +595,80 @@
 
 </script>
 <script>
-
-
-    $('#UserCount').change(function (){
-        var userCount = $('#UserCount').val();
-        $('#UserEcho').html('I have ' + userCount + ' users.');
+    /*$window.ready(function(){
+        var userOnLoad = 1;
+        var startUserCount = $('#UserCount').val(userOnLoad);
+     *//*   $('#UserCount').val();*//*
+        $('#UserEcho').append(startUserCount);
     });
+*/
 
-    $('.cost').change(function(){
+
+    $('.cost').change(function () {
         var kuew = parseFloat($('#kuewSlider').val());
         var sms = parseFloat($('#smsSlider').val());
         var filter = parseFloat($('#filterSlider').val());
         var email = parseFloat($('#emailSlider').val());
-        var users = parseFloat( $('#UserCount').val());
+        var users = parseFloat($('#UserCount').val());
 
         var dollars = 1;
-        var kuewBase = 49*dollars;
-        var emailPK =   15*dollars;
-        var smsPK =     20*dollars
-        var filterCost =  25*dollars;
-        var kuewCost =  20*dollars;
+        var kuewBase = 49 * dollars;
+        var emailPK = 15 * dollars;
+        var smsPK = 20 * dollars
+        var filterCost = 25 * dollars;
+        var kuewCost = 20 * dollars;
+        var kuewIncluded = 0
 
-        var buzzPoint = dollars*4;
+        var buzzPoint = dollars * 4;
 
 
-        var emailKCount = email/1000;
-        var smsKCount = sms/1000;
+        var emailKCount = email / 1000;
+        var smsKCount = sms / 1000;
 
-        var filterSubTotal = filterCost*filter;
-        var usersSubTotal = users*kuewBase;
-        var emailSubTotal = emailPK*emailKCount;
-        var smsSubTotal = smsPK*smsKCount;
-        var kuewSubTotal = kuew*kuewCost;
+        var filterSubTotal = filterCost * filter;
+        var usersSubTotal = users * kuewBase;
+        var emailSubTotal = emailPK * emailKCount;
+        var smsSubTotal = smsPK * smsKCount;
+        /* var kuewSubTotal = kuew*kuewCost;*/
 
-        var totalCost = filterSubTotal+emailSubTotal+smsSubTotal+kuewSubTotal;
-        var userCost = users*kuewBase;
-        var totalBuzzPoints = totalCost*buzzPoint;
-        var monthlyCost = totalCost+userCost;
+        var totalCost = filterSubTotal + emailSubTotal + smsSubTotal;
+        var userCost = users * kuewBase;
+        var totalBuzzPoints = totalCost * buzzPoint;
+        var monthlyCost = (totalCost + userCost).toFixed(2);
+        var discount = function () {    
+
+            if ($(users).val() >= 2) {
+              parseInt($(kuewBase).val() * .1);
+
+            }
+
+            else if  ($(users).val() >= 5 && users < 10) {
+               parseInt($(kuewBase).val() * .1);
+
+            }
+
+            else if ( ($(users).val()>= 10)) {
+                parseInt($(kuewBase).val() * .1);
+
+            }
+            else {
+               parseInt($(kuewBase).val() *0);
+
+            }
+
+
+        };
+
+
+
+    var discountVal = kuewBase - discount;
+    /*parseInt($(kuewBase).val() - (discount).val());*/
+
+        $('#MonthlyDiscount').html('You have a discount of ' + discountVal +'%.' );
+
 
         $('#buzzPointsCalc').html('My monthly BuzzPoint Budget is ' + totalBuzzPoints + ' BuzzPoints');
-        $('#MonthlyTotal').html('My monthly cost is ' + monthlyCost + ' dollars.');
+        $('#MonthlyTotal').html('My monthly cost is $' + (monthlyCost - discountVal) + ' dollars.');
 
 
     });
